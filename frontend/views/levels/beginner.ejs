@@ -1,0 +1,107 @@
+<% layout('layouts/boilerplate') %>
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-light position-relative shadow">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+            <a href="/" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
+                <img src="/img/Logo of the Language Center at the SVU .png" style="width:70px; padding: 10px 10px;"
+                    alt="logo">
+
+                <span class="text-primary">JUBest</span>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-lg-end" id="navbarCollapse">
+                <div class="navbar-nav font-weight-bold  py-0">
+
+
+                    <a href="/levels" class="nav-item nav-link">Levels</a>
+
+
+
+                </div>
+                <button type="button" class="btn btn-primary mx-1 px-4" data-bs-toggle="modal"
+                    data-bs-target="#logoutModal">
+                    Sign out
+                </button>
+                <%- include('../partials/signout') %>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+            <h3 class="display-3 font-weight-bold text-white">Beginner Levels</h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0">Beginner</p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- Levels Start -->
+    <div class=" container-fluid pt-5 ">
+        <div class="container ">
+            <div class="text-center pb-2">
+                <p class="section-title px-5"><span class="px-2">Our Arabic levels for students</span></p>
+                <h1 class="mb-4">Beginner levels for students</h1>
+            </div>
+            <div class="row ">
+                <div class="col-lg-3 mb-5 ">
+                    <div class="card  border-0 bg-light shadow-sm pb-2">
+
+                        <div class="card-body text-center">
+                            <h4 class="card-title">letters</h4>
+                            <p class="card-text">At this level, the pronunciation of Arabic letters, words, and some
+                                short sentences will be explained</p>
+                        </div>
+
+                        <a href="/levels/beginner/letters" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-5">
+                    <div class="card  border-0 bg-light shadow-sm pb-2">
+
+                        <div class="card-body text-center">
+                            <h4 class="card-title"> words</h4>
+                            <p class="card-text">At this stage the student will learn to write words and short sentences
+                                <br><br><br>
+                            </p>
+                        </div>
+
+                        <a href="/levels/beginner/words" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-5">
+                    <div class="card  border-0 bg-light shadow-sm pb-2">
+
+                        <div class="card-body text-center">
+                            <h4 class="card-title">short sentences</h4>
+                            <p class="card-text">At this stage, the student will learn essential Arabic phrases <br>
+                                <br> <br>
+                            </p>
+                        </div>
+
+                        <a href="/levels/beginner/sentences" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-5">
+                    <div class=" card border-0 bg-light shadow-sm pb-2">
+
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Quiz</h4>
+                            <p class="card-text">At this stage, the student can test what he learnt throw the level <br>
+                                <br> <br>
+                            </p>
+                        </div>
+
+                        <a href="/levels/<%= level %>/quiz" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Levels End -->

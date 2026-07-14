@@ -1,0 +1,866 @@
+<% layout('layouts/boilerplate') %>
+<!-- Navbar Start -->
+<div class="container-fluid bg-light position-relative shadow">
+  <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+    <a href="/" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
+      <img src="/img/Logo of the Language Center at the SVU .png" style="width:70px; padding: 10px 10px;" alt="logo">
+
+      <span class="text-primary">JUBest</span>
+    </a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-lg-end" id="navbarCollapse">
+      <div class="navbar-nav font-weight-bold  py-0">
+        <a href="/levels" class="nav-item nav-link">Levels</a>
+      </div>
+      <button type="button" class="btn btn-primary mx-1 px-4" data-bs-toggle="modal" data-bs-target="#logoutModal">
+        Sign out
+      </button>
+      <%- include('../partials/signout') %>
+    </div>
+  </nav>
+</div>
+<!-- Navbar End -->
+
+
+<!-- Header Start -->
+<div class="container-fluid bg-primary mb-5">
+  <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+    <h3 class="display-3 font-weight-bold text-white">Words</h3>
+    <div class="d-inline-flex text-white">
+      <p class="m-0"><a class="text-white" href="/levels">Levels</a></p>
+      <p class="m-0 px-2">/</p>
+      <p class="m-0"><a class="text-white" href="/levels/Beginner">Beginner</a></p>
+      <p class="m-0 px-2">/</p>
+      <p class="m-0"><a class="text-white" href="/levels/Beginner/words">Words</a></p>
+    </div>
+  </div>
+</div>
+<!-- Header End -->
+<!-- Words Start  -->
+<div class="container ">
+  <div class="row pt-5">
+    <div class="col-8">
+
+      <h1 class="mb-5"> The most common Arabic words</h1>
+
+
+    </div>
+    <div class="mb-5">
+
+
+      <h4 class="mb-4" style=" padding-top: 10px;">Personal Pronouns</h4>
+      <p>To start composing basic sentences in Arabic, you’ll probably need to master personal pronouns.
+        Here’s a list of the most essential personal pronouns in Arabic.</p>
+      <div class="table-responsive " style=" display: block !important;
+                      overflow-x: auto !important; width: 100% !important;">
+                      <div class="flex flex-col">
+        <table class="table table-hover text-center  " id="Personal Pronouns">
+          <thead>
+            <tr>
+
+              <th scope="col">Arabic Words</th>
+              <th scope="col">Romanizations</th>
+              <th scope="col">English Translations</th>
+              <th scope="col">Pronunciation of words </th>
+              <% if (currentUser && currentUser.role==='admin' ) { %>
+              <th scope="col"> </th>
+              <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <%  let index= 1 %>
+            <% words.filter(word => word.category === 'Personal Pronouns').forEach(words => { %>
+            <!-- Add Word Modal -->
+            <%- include('../partials/addWord', { words: words, index: index }) %>
+            <tr>
+                <td id="<%=words._id%>" ><%= words.arabic_word %></td>
+                <td><%= words.romanizations %></td>
+                <td><%= words.english_Translations %></td>
+                <td>
+                  <% words.pronunciation_of_Words.forEach(p => { %>
+                  <button class="btn btn-outline-info audio play-button" style="font-size: 5px;" data-url="<%= p.uploadedFile.url %>">
+                    <img class="img-responsive w-25" src="https://img.icons8.com/arcade/64/null/room-sound.png">
+                  </button>
+                  <% }); %>
+                </td>
+                <% if (currentUser && currentUser.role==='admin' ) { %>
+                <td>
+                  <div class="nav-item dropdown">
+                    <a id="settings" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                      </svg></a>
+
+                    <div class="dropdown-menu rounded-0 m-0">
+                      <a href="#" class="btn btn-success btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#editWordsModal_<%= words._id %>">Edit</a>
+                      <a class="btn btn-danger btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal_<%= words._id %>">
+                        Delete
+                      </a>
+                    </div>
+
+                    <!-- update modal-->
+                    <%- include('../partials/updateWord', { words: words }) %>
+
+                    <!-- delete modal-->
+                    <%- include('../partials/deleteWord', { words: words }) %>
+
+                  </div>
+
+                </td>
+                <% } %>
+              </tr>
+              <% }); %>
+              <% if (currentUser && currentUser.role==='admin' ) { %>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <!-- Add Word Button -->
+                  <a class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addWordModal<%= index  %>" data-category="<%= words.category %>">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                    </svg>&nbsp; Add Word
+                  </a>
+
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="mb-4" style=" padding-top: 10px;">Demonstrative Pronouns</h3>
+
+      <p>Demonstrative pronouns are the tools you use to refer to objects and people in your conversations.
+        Learning these will be of great use for your interactions. Here’s a list of the four demonstrative
+        pronouns:</p>
+
+      <div class="flex flex-col">
+        <table class=" table table-hover text-center" id="Demonstrative Pronouns">
+          <thead>
+            <tr>
+              <th scope="col">Arabic Words</th>
+              <th scope="col">Romanizations</th>
+              <th scope="col">English Translations</th>
+              <th scope="col">Pronunciation of words </th>
+              <% if (currentUser && currentUser.role==='admin' ) { %>
+                <th scope="col"> </th>
+                <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <%  index= 2 %>
+            <% words.filter(word => word.category === 'Demonstrative Pronouns').forEach(words => { %>
+              <!-- Add Word Modal -->
+              <%- include('../partials/addWord', { words: words, index: index }) %> 
+              <tr>
+                  <td id="<%=words._id%>" ><%= words.arabic_word %></td>
+                  <td><%= words.romanizations %></td>
+                  <td><%= words.english_Translations %></td>
+                  <td>
+                    <% words.pronunciation_of_Words.forEach(p => { %>
+                    <button class="btn btn-outline-info audio play-button" style="font-size: 5px;" data-url="<%= p.uploadedFile.url %>">
+                      <img class="img-responsive w-25" src="https://img.icons8.com/arcade/64/null/room-sound.png">
+                    </button>
+                    <% }); %>
+                  </td>
+                  <% if (currentUser && currentUser.role==='admin' ) { %>
+                  <td>
+                    <div class="nav-item dropdown">
+                      <a id="settings" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                          <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                        </svg></a>
+  
+                      <div class="dropdown-menu rounded-0 m-0">
+                        <a href="#" class="btn btn-success btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#editWordsModal_<%= words._id %>">Edit</a>
+                        <a class="btn btn-danger btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal_<%= words._id %>">
+                          Delete
+                        </a>
+                      </div>
+  
+                      <!-- update modal-->
+                      <%- include('../partials/updateWord', { words: words }) %>
+  
+                      <!-- delete modal-->
+                      <%- include('../partials/deleteWord', { words: words }) %>
+  
+                  </td>
+                  <% } %>
+                </tr>
+                <% }); %>
+                <% if (currentUser && currentUser.role==='admin' ) { %>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <!-- Add Word Button -->
+                    <a class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addWordModal<%= index  %>" data-category="<%= words.category %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                      </svg>&nbsp; Add Word
+                    </a>
+  
+                  </td>
+                </tr>
+                <% } %>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="mb-4" style=" padding-top: 10px;">Interrogative Pronouns / Question Words</h3>
+
+      <p>Interrogative pronouns are building blocks for questions, a.k.a. the Five Ws. Here’s a list of those
+        with romanizations:</p>
+
+      <div class="flex flex-col">
+        <table class=" table table-hover text-center" id="Interrogative Pronouns / Question Words">
+          <thead>
+            <tr>
+              <th scope="col">Arabic Words</th>
+              <th scope="col">Romanizations</th>
+              <th scope="col">English Translations</th>
+              <th scope="col">Pronunciation of words </th>
+              <% if (currentUser && currentUser.role==='admin' ) { %>
+                <th scope="col"> </th>
+                <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <%  index= 3 %>
+            <% words.filter(word => word.category === 'Interrogative Pronouns / Question Words').forEach(words => { %>
+              <!-- Add Word Modal -->
+              <%- include('../partials/addWord', { words: words, index: index }) %> 
+              <tr>
+                  <td id="<%=words._id%>" ><%= words.arabic_word %></td>
+                  <td><%= words.romanizations %></td>
+                  <td><%= words.english_Translations %></td>
+                  <td>
+                    <% words.pronunciation_of_Words.forEach(p => { %>
+                    <button class="btn btn-outline-info audio play-button" style="font-size: 5px;" data-url="<%= p.uploadedFile.url %>">
+                      <img class="img-responsive w-25" src="https://img.icons8.com/arcade/64/null/room-sound.png">
+                    </button>
+                    <% }); %>
+                  </td>
+                  <% if (currentUser && currentUser.role==='admin' ) { %>
+                  <td>
+                    <div class="nav-item dropdown">
+                      <a id="settings" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                          <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                        </svg></a>
+  
+                      <div class="dropdown-menu rounded-0 m-0">
+                        <a href="#" class="btn btn-success btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#editWordsModal_<%= words._id %>">Edit</a>
+                        <a class="btn btn-danger btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal_<%= words._id %>">
+                          Delete
+                        </a>
+                      </div>
+  
+                      <!-- update modal-->
+                      <%- include('../partials/updateWord', { words: words }) %>
+  
+                      <!-- delete modal-->
+                      <%- include('../partials/deleteWord', { words: words }) %>
+  
+                  </td>
+                  <% } %>
+                </tr>
+                <% }); %>
+                <% if (currentUser && currentUser.role==='admin' ) { %>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <!-- Add Word Button -->
+                    <a class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addWordModal<%= index  %>" data-category="<%= words.category %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                      </svg>&nbsp; Add Word
+                    </a>
+  
+                  </td>
+                </tr>
+                <% } %>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="mb-4" style="padding-bottom: 20px; padding-top: 10px;">Numbers</h3>
+
+
+
+      <div class="flex flex-col">
+        <table class=" table table-hover text-center" id="Numbers">
+          <thead>
+            <tr>
+              <th scope="col">Arabic Words</th>
+              <th scope="col">Romanizations</th>
+              <th scope="col">English Translations</th>
+              <th scope="col">Pronunciation of words </th>
+              <% if (currentUser && currentUser.role==='admin' ) { %>
+                <th scope="col"> </th>
+                <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <%  index= 4 %>
+            <% words.filter(word => word.category === 'Numbers').sort((a, b) => a.pronunciation_of_Words[0].originalName.localeCompare(b.pronunciation_of_Words[0].originalName)).forEach(words => { %>
+              <!-- Add Word Modal -->
+              <%- include('../partials/addWord', { words: words, index: index }) %> 
+              <tr>
+                  <td id="<%=words._id%>" ><%= words.arabic_word %></td>
+                  <td><%= words.romanizations %></td>
+                  <td><%= words.english_Translations %></td>
+                  <td>
+                    <% words.pronunciation_of_Words.forEach(p => { %>
+                    <button class="btn btn-outline-info audio play-button" style="font-size: 5px;" data-url="<%= p.uploadedFile.url %>">
+                      <img class="img-responsive w-25" src="https://img.icons8.com/arcade/64/null/room-sound.png">
+                    </button>
+                    <% }); %>
+                  </td>
+                  <% if (currentUser && currentUser.role==='admin' ) { %>
+                  <td>
+                    <div class="nav-item dropdown">
+                      <a id="settings" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                          <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                        </svg></a>
+  
+                      <div class="dropdown-menu rounded-0 m-0">
+                        <a href="#" class="btn btn-success btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#editWordsModal_<%= words._id %>">Edit</a>
+                        <a class="btn btn-danger btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal_<%= words._id %>">
+                          Delete
+                        </a>
+                      </div>
+  
+                      <!-- update modal-->
+                      <%- include('../partials/updateWord', { words: words }) %>
+  
+                      <!-- delete modal-->
+                      <%- include('../partials/deleteWord', { words: words }) %>
+  
+                  </td>
+                  <% } %>
+                </tr>
+                <% }); %>
+                <% if (currentUser && currentUser.role==='admin' ) { %>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <!-- Add Word Button -->
+                    <a class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addWordModal<%= index  %>" data-category="<%= words.category %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                      </svg>&nbsp; Add Word
+                    </a>
+  
+                  </td>
+                </tr>
+                <% } %>
+
+
+          </tbody>
+        </table>
+      </div>
+      <h3 class="mb-4" style=" padding-top: 10px;">Nouns: Time</h3>
+
+      <p>Nouns are probably the first basic Arabic vocabulary words you start learning as a beginner. They’re
+        one of two key components in a sentence (together with verbs) and you can usually get your point
+        across using just the right noun. With that in mind, let’s look at a few beginner-level Arabic
+        nouns.</p>
+
+      <div class="flex flex-col">
+        <table class=" table table-hover text-center" id="Nouns: Time">
+          <thead>
+            <tr>
+              <th scope="col">Arabic Words</th>
+              <th scope="col">Romanizations</th>
+              <th scope="col">English Translations</th>
+              <th scope="col">Pronunciation of words </th>
+              <% if (currentUser && currentUser.role==='admin' ) { %>
+                <th scope="col"> </th>
+                <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <%  index= 5 %>
+            <% words.filter(word => word.category === 'Nouns: Time').forEach(words => { %>
+              <!-- Add Word Modal -->
+              <%- include('../partials/addWord', { words: words, index: index }) %> 
+              <tr>
+                  <td id="<%=words._id%>" ><%= words.arabic_word %></td>
+                  <td><%= words.romanizations %></td>
+                  <td><%= words.english_Translations %></td>
+                  <td>
+                    <% words.pronunciation_of_Words.forEach(p => { %>
+                    <button class="btn btn-outline-info audio play-button" style="font-size: 5px;" data-url="<%= p.uploadedFile.url %>">
+                      <img class="img-responsive w-25" src="https://img.icons8.com/arcade/64/null/room-sound.png">
+                    </button>
+                    <% }); %>
+                  </td>
+                  <% if (currentUser && currentUser.role==='admin' ) { %>
+                  <td>
+                    <div class="nav-item dropdown">
+                      <a id="settings" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                          <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                        </svg></a>
+  
+                      <div class="dropdown-menu rounded-0 m-0">
+                        <a href="#" class="btn btn-success btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#editWordsModal_<%= words._id %>">Edit</a>
+                        <a class="btn btn-danger btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal_<%= words._id %>">
+                          Delete
+                        </a>
+                      </div>
+  
+                      <!-- update modal-->
+                      <%- include('../partials/updateWord', { words: words }) %>
+  
+                      <!-- delete modal-->
+                      <%- include('../partials/deleteWord', { words: words }) %>
+  
+                  </td>
+                  <% } %>
+                </tr>
+                <% }); %>
+                <% if (currentUser && currentUser.role==='admin' ) { %>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <!-- Add Word Button -->
+                    <a class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addWordModal<%= index  %>" data-category="<%= words.category %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                      </svg>&nbsp; Add Word
+                    </a>
+  
+                  </td>
+                </tr>
+                <% } %>
+
+
+          </tbody>
+        </table>
+      </div>
+      <h3 class="mb-4" style=" padding-top: 10px;">Nouns: Places</h3>
+
+      <p>Nouns are probably the first basic Arabic vocabulary words you start learning as a beginner. They’re
+        one of two key components in a sentence (together with verbs) and you can usually get your point
+        across using just the right noun. With that in mind, let’s look at a few beginner-level Arabic
+        nouns.</p>
+
+      <div class="flex flex-col">
+        <table class=" table table-hover text-center" id="Nouns: Places">
+          <thead>
+            <tr>
+              <th scope="col">Arabic Words</th>
+              <th scope="col">Romanizations</th>
+              <th scope="col">English Translations</th>
+              <th scope="col">Pronunciation of words </th>
+              <% if (currentUser && currentUser.role==='admin' ) { %>
+                <th scope="col"> </th>
+                <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <%  index= 6 %>
+            <% words.filter(word => word.category === 'Nouns: Places').forEach(words => { %>
+              <!-- Add Word Modal -->
+              <%- include('../partials/addWord', { words: words, index: index }) %>  
+              <tr>
+                  <td id="<%=words._id%>" ><%= words.arabic_word %></td>
+                  <td><%= words.romanizations %></td>
+                  <td><%= words.english_Translations %></td>
+                  <td>
+                    <% words.pronunciation_of_Words.forEach(p => { %>
+                    <button class="btn btn-outline-info audio play-button" style="font-size: 5px;" data-url="<%= p.uploadedFile.url %>">
+                      <img class="img-responsive w-25" src="https://img.icons8.com/arcade/64/null/room-sound.png">
+                    </button>
+                    <% }); %>
+                  </td>
+                  <% if (currentUser && currentUser.role==='admin' ) { %>
+                  <td>
+                    <div class="nav-item dropdown">
+                      <a id="settings" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                          <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                        </svg></a>
+  
+                      <div class="dropdown-menu rounded-0 m-0">
+                        <a href="#" class="btn btn-success btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#editWordsModal_<%= words._id %>">Edit</a>
+                        <a class="btn btn-danger btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal_<%= words._id %>">
+                          Delete
+                        </a>
+                      </div>
+  
+                      <!-- update modal-->
+                      <%- include('../partials/updateWord', { words: words }) %>
+  
+                      <!-- delete modal-->
+                      <%- include('../partials/deleteWord', { words: words }) %>
+  
+                  </td>
+                  <% } %>
+                </tr>
+                <% }); %>
+                <% if (currentUser && currentUser.role==='admin' ) { %>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <!-- Add Word Button -->
+                    <a class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addWordModal<%= index  %>" data-category="<%= words.category %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                      </svg>&nbsp; Add Word
+                    </a>
+  
+                  </td>
+                </tr>
+                <% } %>  
+            
+
+
+          </tbody>
+        </table>
+      </div>
+      <h3 class="mb-4" style=" padding-top: 10px;">Nouns: School/Office Essentials</h3>
+
+      <p>Nouns are probably the first basic Arabic vocabulary words you start learning as a beginner. They’re
+        one of two key components in a sentence (together with verbs) and you can usually get your point
+        across using just the right noun. With that in mind, let’s look at a few beginner-level Arabic
+        nouns.</p>
+
+      <div class="flex flex-col">
+        <table class=" table table-hover text-center" id="Nouns: School/Office Essentials">
+          <thead>
+            <tr>
+              <th scope="col">Arabic Words</th>
+              <th scope="col">Romanizations</th>
+              <th scope="col">English Translations</th>
+              <th scope="col">Pronunciation of words </th>
+              <% if (currentUser && currentUser.role==='admin' ) { %>
+                <th scope="col"> </th>
+                <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <%  index= 7 %>
+            <% words.filter(word => word.category === 'Nouns: School/Office Essentials').forEach(words => { %>
+              <!-- Add Word Modal -->
+              <%- include('../partials/addWord', { words: words, index: index }) %> 
+              <tr>
+                  <td id="<%=words._id%>" ><%= words.arabic_word %></td>
+                  <td><%= words.romanizations %></td>
+                  <td><%= words.english_Translations %></td>
+                  <td>
+                    <% words.pronunciation_of_Words.forEach(p => { %>
+                    <button class="btn btn-outline-info audio play-button" style="font-size: 5px;" data-url="<%= p.uploadedFile.url %>">
+                      <img class="img-responsive w-25" src="https://img.icons8.com/arcade/64/null/room-sound.png">
+                    </button>
+                    <% }); %>
+                  </td>
+                  <% if (currentUser && currentUser.role==='admin' ) { %>
+                  <td>
+                    <div class="nav-item dropdown">
+                      <a id="settings" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                          <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                        </svg></a>
+  
+                      <div class="dropdown-menu rounded-0 m-0">
+                        <a href="#" class="btn btn-success btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#editWordsModal_<%= words._id %>">Edit</a>
+                        <a class="btn btn-danger btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal_<%= words._id %>">
+                          Delete
+                        </a>
+                      </div>
+  
+                      <!-- update modal-->
+                      <%- include('../partials/updateWord', { words: words }) %>
+  
+                      <!-- delete modal-->
+                      <%- include('../partials/deleteWord', { words: words }) %>
+  
+                  </td>
+                  <% } %>
+                </tr>
+                <% }); %>
+                <% if (currentUser && currentUser.role==='admin' ) { %>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <!-- Add Word Button -->
+                    <a class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addWordModal<%= index  %>" data-category="<%= words.category %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                      </svg>&nbsp; Add Word
+                    </a>
+  
+                  </td>
+                </tr>
+                <% } %>
+  
+            
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="mb-4" style=" padding-top: 10px;">Verbs: Daily Routine Verbs</h3>
+
+      <p>Our next set of Arabic beginner words covers the most essential verbs in a variety of categories. You
+        can use these to form more complete sentences in Arabic..</p>
+
+      <div class="flex flex-col">
+        <table class=" table table-hover text-center" id="Verbs: Daily Routine Verbs">
+          <thead>
+            <tr>
+              <th scope="col">Arabic Words</th>
+              <th scope="col">Romanizations</th>
+              <th scope="col">English Translations</th>
+              <th scope="col">Pronunciation of words </th>
+              <% if (currentUser && currentUser.role==='admin' ) { %>
+                <th scope="col"> </th>
+                <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <%  index= 8 %>
+            <% words.filter(word => word.category === 'Verbs: Daily Routine Verbs').forEach(words => { %>
+              <!-- Add Word Modal -->
+              <%- include('../partials/addWord', { words: words, index: index }) %>  
+              <tr>
+                  <td id="<%=words._id%>" ><%= words.arabic_word %></td>
+                  <td><%= words.romanizations %></td>
+                  <td><%= words.english_Translations %></td>
+                  <td>
+                    <% words.pronunciation_of_Words.forEach(p => { %>
+                    <button class="btn btn-outline-info audio play-button" style="font-size: 5px;" data-url="<%= p.uploadedFile.url %>">
+                      <img class="img-responsive w-25" src="https://img.icons8.com/arcade/64/null/room-sound.png">
+                    </button>
+                    <% }); %>
+                  </td>
+                  <% if (currentUser && currentUser.role==='admin' ) { %>
+                  <td>
+                    <div class="nav-item dropdown">
+                      <a id="settings" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                          <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                        </svg></a>
+  
+                      <div class="dropdown-menu rounded-0 m-0">
+                        <a href="#" class="btn btn-success btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#editWordsModal_<%= words._id %>">Edit</a>
+                        <a class="btn btn-danger btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal_<%= words._id %>">
+                          Delete
+                        </a>
+                      </div>
+  
+                      <!-- update modal-->
+                      <%- include('../partials/updateWord', { words: words }) %>
+  
+                      <!-- delete modal-->
+                      <%- include('../partials/deleteWord', { words: words }) %>
+  
+                  </td>
+                  <% } %>
+                </tr>
+                <% }); %>
+                <% if (currentUser && currentUser.role==='admin' ) { %>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <!-- Add Word Button -->
+                    <a class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addWordModal<%= index  %>" data-category="<%= words.category %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                      </svg>&nbsp; Add Word
+                    </a>
+  
+                  </td>
+                </tr>
+                <% } %>
+
+          </tbody>
+        </table>
+      </div>
+      <h3 class="mb-4" style=" padding-top: 10px;">Adjectives: Describing Objects</h3>
+
+      <p>Learning Arabic words to describe the world around you can liven up your conversations, strengthen
+        your Arabic writing, and allow you to better express yourself in this rather expressive language.
+      </p>
+
+      <div class="flex flex-col">
+        <table class=" table table-hover text-center" id="Adjectives: Describing Objects">
+          <thead>
+            <tr>
+              <th scope="col">Arabic Words</th>
+              <th scope="col">Romanizations</th>
+              <th scope="col">English Translations</th>
+              <th scope="col">Pronunciation of words </th>
+              <% if (currentUser && currentUser.role==='admin' ) { %>
+                <th scope="col"> </th>
+                <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <%  index= 9 %>
+            <% words.filter(word => word.category === 'Adjectives: Describing Objects').forEach(words => { %>
+              <!-- Add Word Modal -->
+              <%- include('../partials/addWord', { words: words, index: index }) %> 
+              <tr>
+                  <td id="<%=words._id%>" ><%= words.arabic_word %></td>
+                  <td><%= words.romanizations %></td>
+                  <td><%= words.english_Translations %></td>
+                  <td>
+                    <% words.pronunciation_of_Words.forEach(p => { %>
+                    <button class="btn btn-outline-info audio play-button" style="font-size: 5px;" data-url="<%= p.uploadedFile.url %>">
+                      <img class="img-responsive w-25" src="https://img.icons8.com/arcade/64/null/room-sound.png">
+                    </button>
+                    <% }); %>
+                  </td>
+                  <% if (currentUser && currentUser.role==='admin' ) { %>
+                  <td>
+                    <div class="nav-item dropdown">
+                      <a id="settings" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                          <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                        </svg></a>
+  
+                      <div class="dropdown-menu rounded-0 m-0">
+                        <a href="#" class="btn btn-success btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#editWordsModal_<%= words._id %>">Edit</a>
+                        <a class="btn btn-danger btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal_<%= words._id %>">
+                          Delete
+                        </a>
+                      </div>
+  
+                      <!-- update modal-->
+                      <%- include('../partials/updateWord', { words: words }) %>
+  
+                      <!-- delete modal-->
+                      <%- include('../partials/deleteWord', { words: words }) %>
+  
+                  </td>
+                  <% } %>
+                </tr>
+                <% }); %>
+                <% if (currentUser && currentUser.role==='admin' ) { %>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <!-- Add Word Button -->
+                    <a class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addWordModal<%= index  %>" data-category="<%= words.category %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                      </svg>&nbsp; Add Word
+                    </a>
+  
+                  </td>
+                </tr>
+                <% } %>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="mb-4" style=" padding-top: 10px;">Adjectives: Describing People & Emotions</h3>
+
+      <p>Learning Arabic words to describe the world around you can liven up your conversations, strengthen
+        your Arabic writing, and allow you to better express yourself in this rather expressive language.
+      </p>
+
+      <div class="flex flex-col">
+        <table class=" table table-hover text-center" id="Adjectives: Describing People & Emotions">
+          <thead>
+            <tr>
+              <th scope="col">Arabic Words</th>
+              <th scope="col">Romanizations</th>
+              <th scope="col">English Translations</th>
+              <th scope="col">Pronunciation of words </th>
+              <% if (currentUser && currentUser.role==='admin' ) { %>
+                <th scope="col"> </th>
+                <% } %>
+            </tr>
+          </thead>
+          <tbody>
+            <%  index= 10 %>
+            <% words.filter(word => word.category === 'Adjectives: Describing People & Emotions').forEach(words => { %>
+              <!-- Add Word Modal -->
+              <%- include('../partials/addWord', { words: words, index: index }) %>  
+              <tr>
+                  <td id="<%=words._id%>" ><%= words.arabic_word %></td>
+                  <td><%= words.romanizations %></td>
+                  <td><%= words.english_Translations %></td>
+                  <td>
+                    <% words.pronunciation_of_Words.forEach(p => { %>
+                    <button class="btn btn-outline-info audio play-button" style="font-size: 5px;" data-url="<%= p.uploadedFile.url %>">
+                      <img class="img-responsive w-25" src="https://img.icons8.com/arcade/64/null/room-sound.png">
+                    </button>
+                    <% }); %>
+                  </td>
+                  <% if (currentUser && currentUser.role==='admin' ) { %>
+                  <td>
+                    <div class="nav-item dropdown">
+                      <a id="settings" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                          <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                        </svg></a>
+  
+                      <div class="dropdown-menu rounded-0 m-0">
+                        <a href="#" class="btn btn-success btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#editWordsModal_<%= words._id %>">Edit</a>
+                        <a class="btn btn-danger btn-sm mx-1 dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal_<%= words._id %>">
+                          Delete
+                        </a>
+                      </div>
+  
+                      <!-- update modal-->
+                      <%- include('../partials/updateWord', { words: words }) %>
+  
+                      <!-- delete modal-->
+                      <%- include('../partials/deleteWord', { words: words }) %>
+  
+                  </td>
+                  <% } %>
+                </tr>
+                <% }); %>
+                <% if (currentUser && currentUser.role==='admin' ) { %>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <!-- Add Word Button -->
+                    <a class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addWordModal<%= index  %>" data-category="<%= words.category %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                      </svg>&nbsp; Add Word
+                    </a>
+  
+                  </td>
+                </tr>
+                <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+<!-- Words End -->

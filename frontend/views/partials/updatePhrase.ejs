@@ -1,0 +1,37 @@
+<div class="modal fade" id="editPhraseModal_<%= phrases._id %>" tabindex="-1" aria-labelledby="editPhraseModalLabel_<%= phrases._id %>" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editPhraseModalLabel_<%= phrases._id %>">Edit Phrase</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/levels/beginner/sentences/<%= phrases._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="arabicPhrase" class="form-label">Arabic Phrase</label>
+              <input type="text" class="form-control" id="arabicPhrase" name="arabicPhrase" value="<%= phrases.arabic_Phrase %>" required>
+            </div>
+            <div class="mb-3">
+              <label for="romanizations" class="form-label">Romanization</label>
+              <input type="text" class="form-control" id="romanizations" name="romanizations" value="<%= phrases.romanizations %>" required>
+            </div>
+            <div class="mb-3">
+              <label for="englishTranslations" class="form-label">English Translation</label>
+              <input type="text" class="form-control" id="englishTranslations" name="englishTranslations" value="<%= phrases.english_Translations %>" required>
+            </div>
+            <div class="mb-3">
+              <label for="pronunciationFile" class="form-label">Pronunciation of Phrase</label>
+              <input type="hidden" name="category" value="<%= phrases.category %>">
+              <input type="file" class="form-control" id="pronunciationFile" name="pronunciationFile" accept="audio/*" >
+           
+              <<p><strong>Current File: <%= (phrases.pronunciation_of_Phrases && phrases.pronunciation_of_Phrases.length > 0) ? phrases.pronunciation_of_Phrases[0].originalName : 'No file uploaded' %> .</strong> Do not upload if you want the current file</p>
+              
+            </div>
+            <button type="submit" class="btn btn-lg btn-info btn-block">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

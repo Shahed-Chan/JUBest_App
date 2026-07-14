@@ -1,0 +1,32 @@
+<div class="modal fade" id="addPhraseModal<%=index%>" tabindex="-1" aria-labelledby="addPhraseModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addPhraseModalLabel">Add Phrase</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body text-center">
+          <form action="/levels/beginner/sentences/add" method="POST" enctype="multipart/form-data" >
+            <div class="mb-3">
+              <label for="arabicPhrase" class="form-label">Arabic Phrase</label>
+              <input type="text" class="form-control" id="arabicPhrase" name="arabicPhrase" required>
+            </div>
+            <div class="mb-3">
+              <label for="romanizations" class="form-label">Romanization</label>
+              <input type="text" class="form-control" id="romanizations" name="romanizations" required>
+            </div>
+            <div class="mb-3">
+              <label for="englishTranslations" class="form-label">English Translation</label>
+              <input type="text" class="form-control" id="englishTranslations" name="englishTranslations" required>
+            </div>
+            <div class="mb-3">
+              <label for="pronunciationFile" class="form-label">Pronunciation of Phrase</label>
+              <input type="hidden" name="category" value="<%= phrases.category  %>">
+              <input type="file" class="form-control" id="pronunciationFile" name="pronunciationFile" accept="audio/*" required >
+            </div>
+            <button type="submit" class="btn btn-lg btn-info  btn-block">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

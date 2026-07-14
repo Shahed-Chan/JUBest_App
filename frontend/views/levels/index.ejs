@@ -1,0 +1,169 @@
+<% layout('layouts/boilerplate') -%>
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-light position-relative shadow">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light  py-3 py-lg-0 px-0 px-lg-5">
+            <a href="" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
+                <img src="/img/Logo of the Language Center at the SVU .png " style="width:70px; padding: 10px 10px;"
+                    alt="logo">
+
+                <span class="text-primary">JUBest</span>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-lg-end " id="navbarCollapse">
+                <div class="navbar-nav font-weight-bold  py-0">
+                    <a href="/" class="nav-item nav-link active ">Home</a>
+
+
+                </div>
+                <% if(!currentUser) {%>
+                    <a href="/signin" class="btn btn-primary px-4">Sign in</a>
+                    <a href="/register" class="px-4">Sign up</a>
+                    <% } else { %>
+                        <a href="/levels" class="btn btn-outline-primary px-4">levels</a>
+                        <button type="button" class="btn btn-primary mx-1 px-4" data-bs-toggle="modal"
+                            data-bs-target="#logoutModal">
+                            Sign out
+                        </button>
+                        <%- include('../partials/signout') %>
+                            <% } %>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary px-0 px-md-5 mb-5">
+        <div class="row align-items-center px-3">
+            <div class="col-lg-6 text-center text-lg-left">
+                <h4 class="text-white mb-4 mt-5 mt-lg-0">JUBest Website</h4>
+                <h1 class="display-3 font-weight-bold text-white">New Approach to Language Center Syrian Virtual
+                    University – SVU
+                </h1>
+                <p class="text-white mb-4">Is a web platform that allow Non-Arabic speaker who went to learn Arabic
+                    language in SVU .</p>
+                <a href="#" class="btn btn-secondary mt-1 py-3 px-5">Learn More</a>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <img class="img-fluid mt-5 rounded-circle img-thumbnail" src="/img/Syrian Virtual University – SVU.jpg"
+                    alt="">
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+    <!-- Facilities Start -->
+    <div class="container-fluid pt-5">
+        <div class="container pb-3">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px; ">
+                        <i class="fas fa-font fa-3x mb-3 text-primary"></i>
+                        <div class="pl-4">
+                            <h4>Letters</h4>
+                            <p class="m-0">This is the first educational step in which Arabic letters will be taught to
+                                non-speakers students </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px; ">
+                        <i class="fas fa-book fa-3x mb-3 text-primary"></i>
+                        <div class="pl-4">
+                            <h4>Words</h4>
+                            <p class="m-0">This is the second educational step in which Arabic words will be taught to
+                                non-speakers students </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px; ">
+                        <i class="fas fas fa-book-open fa-3x mb-3 text-primary"></i>
+                        <div class="pl-4">
+                            <h4>Sentences</h4>
+                            <p class="m-0">This is the third educational step in which Arabic sentences will be taught
+                                to non-speakers students</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px; ">
+                        <i class="fas fa-book-reader fa-3x text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4> short stories</h4>
+                            <p class="m-0">This is the fourth educational step in which Arabic short stories are
+                                presented to non-speakers students</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                        <i class="fab fa-youtube  fa-3x text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>video</h4>
+                            <p class="m-0">This is the fifth educational step in which Arabic short stories are
+                                presented to non-speakers students</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px; ">
+                        <i class="fas fa-pencil-alt fa-3x  text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>Quizzes</h4>
+                            <p class="m-0">This is the last educational step in which Arabic short quizzes are presented
+                                to non-speakers students</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Facilities Start -->
+
+
+
+    <!-- Team Start -->
+    <div class="container-fluid pt-5">
+        <div class="container">
+            <div class="text-center pb-2">
+                <p class="section-title px-5"><span class="px-2">Team members & supervisors</span></p>
+                <h1 class="mb-4">Meet Our Team</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-2 text-center team mb-5">
+                    <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
+                        <img class="img-fluid w-100  " src="/img/default.jpg" alt="">
+                        <div
+                            class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                            <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;"
+                                href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
+                                href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <h4>Dr. Mohammad Assaad</h4>
+                    <i>Supervisor</i>
+                </div>
+
+                <div class="col-md-6 col-lg-2 text-center team mb-5">
+                    <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%;">
+                        <img class="img-fluid w-100" src="/img/default.jpg" alt="">
+                        <div
+                            class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                            <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px;"
+                                href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px;"
+                                href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                    <h4>Shahed</h4>
+                    <i>Main Developer</i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->

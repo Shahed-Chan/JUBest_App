@@ -1,0 +1,37 @@
+<div class="modal fade" id="editWordsModal_<%= words._id %>" tabindex="-1" aria-labelledby="editWordsModalLabel_<%= words._id %>" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editWordsModalLabel_<%= words._id %>">Edit Word</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/levels/beginner/words/<%= words._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="arabicWord" class="form-label">Arabic Words</label>
+              <input type="text" class="form-control" id="arabicWord" name="arabicWord" value="<%= words.arabic_word %>" required>
+            </div>
+            <div class="mb-3">
+              <label for="romanizations" class="form-label">Romanization</label>
+              <input type="text" class="form-control" id="romanizations" name="romanizations" value="<%= words.romanizations %>" required>
+            </div>
+            <div class="mb-3">
+              <label for="englishTranslations" class="form-label">English Translation</label>
+              <input type="text" class="form-control" id="englishTranslations" name="englishTranslations" value="<%= words.english_Translations %>" required>
+            </div>
+            <div class="mb-3">
+              <label for="pronunciationFile" class="form-label">Pronunciation of Words</label>
+              <input type="hidden" name="category" value="<%= words.category %>">
+              <input type="file" class="form-control" id="pronunciationFile" name="pronunciationFile" accept="audio/*" >
+           
+              <p><strong>Current File: <%= words.pronunciation_of_Words[0].originalName %> .</strong> Do not upload if you want the current file</p>
+              
+            </div>
+            <button type="submit" class="btn btn-lg btn-info btn-block">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

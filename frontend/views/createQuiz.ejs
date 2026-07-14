@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>JUBest</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="SVU" name="keywords">
+    <meta content="SVU" name="description">
+
+    <!-- Favicon -->
+    <link href="/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Flaticon Font -->
+    <link href="/lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('./partials/flash') %>
+        <div class="container mt-5 ">
+            <div class="card ">
+                <div class="card-header">
+                    <h1 class="card-title">Create a Quiz</h1>
+                </div>
+                <div class="card-body">
+
+                    <form action="/levels/<%= level %>/quiz/create" method="POST">
+                        <div class="form-group col-lg-6">
+                            <label for="name">Quiz Name:</label>
+                            <input type="text" name="name" id="name" class="form-control" required>
+                            <input type="hidden" name="id" value="<%= quiz._id %>">
+                            <input type="hidden" name="level" value="<%= level %>">
+                        </div>
+
+                        <div id="questions">
+                            <h2>Questions:</h2>
+
+
+                        </div>
+                        <button type="button" id="add-question" class="btn btn-primary mb-3">Add Question</button>
+                        <button id="create-quiz-btn" type="submit" class="btn btn-primary mb-3" disabled>Create
+                            Quiz</button>
+                        <a class="btn btn-secondary mb-3" href="/levels/<%= level %>/quiz">Cancel
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer mt-auto">
+            <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
+
+                <div class="container-fluid pt-5" style="border-top: 1px solid rgba(23, 162, 184, .2);;">
+                    <p class="m-0 text-center text-white">
+                        &copy; <span class="text-primary font-weight-bold">JUBest</span>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <script src="/js/createQuiz.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

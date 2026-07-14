@@ -1,0 +1,235 @@
+<% layout('layouts/boilerplate') %>
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-light position-relative shadow">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light  py-3 py-lg-0 px-0 px-lg-5">
+            <a href="/" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
+                <img src="/img/Logo of the Language Center at the SVU .png" style="width:70px; padding: 10px 10px;"
+                    alt="logo">
+
+                <span class="text-primary">JUBest</span>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-lg-end " id="navbarCollapse">
+                <div class="navbar-nav font-weight-bold  py-0">
+
+
+
+                </div>
+
+                <button type="button" class="btn btn-primary mx-1 px-4" data-bs-toggle="modal"
+                    data-bs-target="#logoutModal">
+                    Sign out
+                </button>
+                <%- include('../partials/signout') %>
+
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+            <h3 class="display-3 font-weight-bold text-white">Letters </h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0"><a class="text-white" href="/levels">Levels</a></p>
+                <p class="m-0 px-2">/</p>
+                <p class="m-0"><a class="text-white" href="/levels/Beginner">Beginner</a></p>
+                <p class="m-0 px-2">/</p>
+                <p class="m-0"><a class="text-white" href="/levels/beginner/letters">Letters</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Table start -->
+    <section class="table-letters">
+        <table class="has-fixed-layout"></table>
+        <table cellspacing="0" class="table  table-bordered text-center " style=" border-collapse: collapse;">
+
+            <tr>
+                <th scope="row" style="text-align: center ">Arabic Letters</th>
+
+            </tr>
+
+            <tbody>
+                <tr>
+
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound1()" id="alif">
+                            <img src="/img/ا.png" alt="buttonpng" style="  width: 40px;
+                          height: 40px;  " />
+
+                        </button>
+
+                    </td>
+                    <td> <button class=" zoom btn btn-outline-info " onclick="sound2()" id="alif">
+                            <img src="/img/ب.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " />
+
+                        </button>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound3()" id="alif">
+                            <img src="/img/ت.png" alt="buttonpng" style="  width: 40px;
+                            height: 40px;  " />
+
+                        </button>
+                    </td>
+
+                    <td><button class=" zoom btn btn-outline-info " onclick="sound4()" id="alif">
+                            <img src="/img/ث.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " />
+
+                        </button>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound5()" id="alif">
+                            <img src="/img/ج.png" alt="buttonpng" style="  width: 40px;
+                            height: 40px;  " />
+
+                        </button>
+                    </td>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound6()" id="alif">
+                            <img src="/img/ح.png" alt="buttonpng" style="  width: 40px;
+                            height: 40px;  " />
+
+                        </button>
+                    </td>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound7()" id="alif">
+                            <img src="/img/خ.png" alt="buttonpng" style="  width: 40px;
+                            height: 40px;  " />
+
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+
+
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound8()" id="alif">
+                            <img src="/img/د.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " />
+
+                        </button>
+                    </td>
+                    <td><button class=" zoom btn btn-outline-info " onclick="sound9()" id="alif">
+                            <img src="/img/ذ.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " />
+
+                        </button>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound10()" id="alif">
+                            <img src="/img/ر.png" alt="buttonpng" style="  width: 40px;
+                            height: 40px;  " />
+
+                        </button>
+                    </td>
+
+                    <td><button class=" zoom btn btn-outline-info " onclick="sound11()" id="alif">
+                            <img src="/img/ز.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " />
+
+                        </button>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound12()" id="alif">
+                            <img src="/img/س.png" alt="buttonpng" style="  width: 40px;
+                            height: 40px;  " />
+
+                        </button>
+                    </td>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound13()" id="alif">
+                            <img src="/img/ش.png" alt="buttonpng" style="  width: 40px;
+                            height: 40px;  " />
+
+                        </button>
+                    </td>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound14()" id="alif">
+                            <img src="/img/ص.png" alt="buttonpng" style="  width: 40px;
+                            height: 40px;  " />
+
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td><button class=" zoom btn btn-outline-info " onclick="sound15()" id="alif">
+                            <img src="/img/ض.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " /> </button>
+
+                        </button></td>
+                    <td><button class=" zoom btn btn-outline-info " onclick="sound16()" id="alif">
+                            <img src="/img/ط.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " /> </button>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound17()" id="alif">
+                            <img src="/img/ظ.png" alt="buttonpng" style="  width: 40px;
+                            height: 40px;  " /> </button>
+                    </td>
+
+                    <td><button class=" zoom btn btn-outline-info " onclick="sound18()" id="alif">
+                            <img src="/img/ع.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " /> </button>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound19()" id="alif">
+                            <img src="/img/غ.png" alt="buttonpng" style="  width: 40px;
+                            height: 40px;  " /> </button>
+                    </td>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound20()" id="alif">
+                            <img src="/img/ف.png" alt="buttonpng" style="  width: 40px;
+                            height: 40px;  " /> </button>
+                    </td>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound21()" id="alif">
+                            <img src="/img/ق.png" alt="buttonpng" style="  width: 40px;
+                            height: 40px;  " /> </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound22()" id="alif">
+                            <img src="/img/ك.png" alt="buttonpng" style="  width: 40px;
+                            height: 40px;  " /> </button>
+                    </td>
+
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound23()" id="alif">
+                            <img src="/img/ل.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " /> </button>
+                    </td>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound24()" id="alif">
+                            <img src="/img/م.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " /> </button>
+                    </td>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound25()" id="alif">
+                            <img src="/img/ن.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " /> </button>
+                    </td>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound26()" id="alif">
+                            <img src="/img/ه.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " /> </button>
+                    </td>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound27()" id="alif">
+                            <img src="/img/و.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " /> </button>
+                    </td>
+                    <td>
+                        <button class=" zoom btn btn-outline-info " onclick="sound28()" id="alif">
+                            <img src="/img/ي.png" alt="buttonpng" style="  width: 40px;
+                        height: 40px;  " /> </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <!-- Table End -->

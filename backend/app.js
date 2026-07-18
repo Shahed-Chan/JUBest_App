@@ -17,6 +17,7 @@ const User = require('./models/user');
 const levels = require('./routes/levels');
 const quizRoutes = require('./routes/quizzes');
 const userRoutes = require('./routes/users');
+const aiRoutes = require('./routes/ai');
 const ExpressError = require('./utils/expressError');
 const mongoSanitize = require('express-mongo-sanitize');
 //const db_Url = process.env.DB_URL
@@ -85,6 +86,7 @@ app.use((req, res, next) => {
 app.use('/', userRoutes);
 app.use('/levels', levels)
 app.use('/levels/:level/quiz', quizRoutes)
+app.use('/api/ai', aiRoutes);
 
 app.get('/', (req, res) => {
     res.header('Cache-Control', 'no-cache, no-store');

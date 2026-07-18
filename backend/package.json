@@ -12,6 +12,7 @@
   "author": "Chado Dis",
   "license": "ISC",
   "dependencies": {
+    "@google/genai": "^2.12.0",
     "cloudinary": "^1.41.3",
     "connect-flash": "^0.1.1",
     "crypto": "^1.0.1",

@@ -4,7 +4,7 @@ dns.setServers(['8.8.8.8', '1.1.1.1']);
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
-
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const methodoverride = require('method-override');
@@ -43,7 +43,7 @@ app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/../frontend/views');
 app.use(express.static(__dirname + '/../frontend/public'));
-
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodoverride('_method'));
 app.use(mongoSanitize());
@@ -81,6 +81,7 @@ app.use((req, res, next) => {
 
     next();
 })
+
 
 // Routes
 app.use('/', userRoutes);
